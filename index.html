@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>BoyutMM · Tanıtım videosu (önizleme)</title>
+<style>
+:root{--bg:#F1F2EE;--ink:#0E100D;--ink2:#5F6459;--ac:#67743A;--lime:#D4EA6E;--dark:#17190F;--card:#fff}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+main{max-width:520px;margin:0 auto;padding:16px 16px calc(28px + env(safe-area-inset-bottom))}
+header{display:flex;align-items:center;gap:12px;margin:4px 0 14px}
+header img{width:40px;height:40px}
+h1{font-size:20px;margin:0;letter-spacing:-.01em}
+header p{margin:0;color:var(--ink2);font-size:13px}
+.tabs{display:flex;gap:8px;margin-bottom:12px}
+.tabs button{flex:1;border:0;border-radius:999px;padding:11px 0;font-weight:600;font-size:15px;background:#fff;color:var(--ink)}
+.tabs button.on{background:var(--ac);color:#fff}
+.tabs button:disabled{opacity:.45}
+.player{position:relative;border-radius:22px;overflow:hidden;background:var(--dark);aspect-ratio:9/16;box-shadow:0 12px 30px -10px rgba(20,18,14,.3)}
+video{width:100%;height:100%;display:block;object-fit:contain;background:var(--dark)}
+.bar{position:relative;height:8px;border-radius:4px;background:#DDE0D6;margin:14px 0 6px;overflow:hidden}
+.bar i{position:absolute;left:0;top:0;height:100%;background:var(--ac)}
+.bar b{position:absolute;top:0;width:2px;height:100%;background:var(--bg)}
+.meta{display:flex;justify-content:space-between;font-size:13px;color:var(--ink2);margin-bottom:14px}
+.ctrl{display:flex;gap:8px;margin-bottom:18px}
+.ctrl button{flex:1;border:0;border-radius:14px;padding:12px 0;background:#fff;font-weight:600;font-size:15px;color:var(--ink)}
+.ctrl button.main{background:var(--dark);color:var(--lime)}
+h2{font-size:15px;margin:0 0 10px;color:var(--ink2);font-weight:600}
+ol{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+li button{width:100%;display:flex;align-items:center;gap:12px;border:0;border-radius:16px;background:#fff;padding:8px;text-align:left;color:var(--ink)}
+li img{width:48px;height:85px;object-fit:cover;border-radius:10px;flex:none;background:#DDE0D6}
+li .t{font-weight:600;font-size:15px}
+li .s{font-size:13px;color:var(--ink2)}
+li.on button{outline:3px solid var(--ac)}
+li .n{margin-left:auto;font:600 13px ui-monospace,monospace;color:var(--ac);padding-right:6px}
+.note{margin-top:18px;font-size:13px;color:var(--ink2);background:#fff;border-radius:16px;padding:12px 14px}
+.note b{color:var(--ink)}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <img src="mark.svg" alt="">
+    <div><h1>BoyutMM · Tanıtım videosu</h1><p>9:16 · ~32 sn · 11 klip · motion design, yüzsüz</p></div>
+  </header>
+  <div class="tabs"><button class="on" data-v="tr">Türkçe</button><button data-v="en" id="enBtn" disabled>English · sırada</button></div>
+  <div class="player"><video id="v" src="tr.mp4" playsinline controls preload="metadata" poster="k/02-brand.jpg"></video></div>
+  <div class="bar" id="bar"><i id="prog"></i></div>
+  <div class="meta"><span id="now">Klip 1 / 11</span><span id="tm">0:00 / 0:32</span></div>
+  <div class="ctrl"><button id="prev">◀ Önceki</button><button class="main" id="play">▶ Oynat</button><button id="next">Sonraki ▶</button></div>
+  <h2>Klipler: dokun, oradan oynasın</h2>
+  <ol id="list"></ol>
+  <div class="note"><b>Notlar.</b> Müzik ve arayüz sesleri koda sentezlendi, telifsiz; istersen kendi müziğinle değiştirilir. Fiyat yok. Ekran görüntüleri gerçek uygulamadan; sipariş, analitik ve ölçü kartları tanıtım için yeniden çizildi, çubuklar göreli (gerçek veri değil).</div>
+</main>
+<script>
+const v=document.getElementById('v'), list=document.getElementById('list');
+let K=[];
+const fmt=s=>`${Math.floor(s/60)}:${String(Math.floor(s%60)).padStart(2,'0')}`;
+Promise.resolve([{"n": "01-hook", "t": 0, "d": 2.8, "title": "Kanca · kâğıt menü"}, {"n": "02-brand", "t": 2.8, "d": 2.4, "title": "Marka · BoyutMM"}, {"n": "03-foto", "t": 5.2, "d": 2.8, "title": "Adım 1 · Fotoğraf"}, {"n": "04-olcu", "t": 8.0, "d": 2.6, "title": "Adım 2 · Ölçü"}, {"n": "05-studyo", "t": 10.6, "d": 3.0, "title": "Adım 3 · Stüdyo 3D"}, {"n": "06-tasarim", "t": 13.6, "d": 3.2, "title": "Adım 4 · Tasarım"}, {"n": "07-qr", "t": 16.8, "d": 2.8, "title": "Adım 5 · QR"}, {"n": "08-ar", "t": 19.6, "d": 3.4, "title": "Adım 6 · Gerçek boyut (AR)"}, {"n": "09-siparis", "t": 23.0, "d": 3.2, "title": "Adım 7 · Sipariş → mutfak"}, {"n": "10-analitik", "t": 26.2, "d": 2.8, "title": "Adım 8 · Analitik"}, {"n": "11-cta", "t": 29.0, "d": 3.0, "title": "Kapanış · CTA"}]).then(k=>{K=k;
+  const bar=document.getElementById('bar'), tot=k[k.length-1].t+k[k.length-1].d;
+  k.forEach((c,i)=>{ if(i) {const b=document.createElement('b'); b.style.left=(c.t/tot*100)+'%'; bar.appendChild(b);}
+    const li=document.createElement('li'); li.innerHTML=`<button><img src="k/${c.n}.jpg" alt=""><span><span class="t">${c.title}</span><br><span class="s">${fmt(c.t)} · ${c.d.toFixed(1)} sn</span></span><span class="n">${String(i+1).padStart(2,'0')}</span></button>`;
+    li.onclick=()=>{v.currentTime=c.t+0.01; v.play();}; list.appendChild(li); });
+  upd();
+});
+const cur=()=>{let i=0; K.forEach((c,j)=>{if(v.currentTime>=c.t-0.01) i=j;}); return i;};
+function upd(){ if(!K.length) return; const i=cur(), d=v.duration||32;
+  document.getElementById('prog').style.width=(v.currentTime/d*100)+'%';
+  document.getElementById('now').textContent=`Klip ${i+1} / ${K.length} · ${K[i].title}`;
+  document.getElementById('tm').textContent=`${fmt(v.currentTime)} / ${fmt(d)}`;
+  [...list.children].forEach((li,j)=>li.classList.toggle('on',j===i));
+  document.getElementById('play').textContent=v.paused?'▶ Oynat':'❚❚ Durdur'; }
+['timeupdate','play','pause','loadedmetadata','seeked'].forEach(e=>v.addEventListener(e,upd));
+document.getElementById('play').onclick=()=>v.paused?v.play():v.pause();
+document.getElementById('prev').onclick=()=>{const i=cur(); const back=v.currentTime-K[i].t>0.6?i:Math.max(0,i-1); v.currentTime=K[back].t+0.01; v.play();};
+document.getElementById('next').onclick=()=>{const i=Math.min(K.length-1,cur()+1); v.currentTime=K[i].t+0.01; v.play();};
+document.getElementById('bar').onclick=e=>{const r=e.currentTarget.getBoundingClientRect(); v.currentTime=(e.clientX-r.left)/r.width*(v.duration||32);};
+</script>
+</body>
+</html>
